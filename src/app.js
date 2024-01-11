@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const connection = require("./connection");
 const regRoutes = require("./routes/registerRoutes");
+const loginRoutes = require("./routes/loginRoutes");
 
 //Connect to DB
 connection.connectToDb;
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 //Routes middlewares
 app.use("/api/user", regRoutes);
+app.use("/api/user", loginRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server Running at ${PORT}`);
