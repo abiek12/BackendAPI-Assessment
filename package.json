@@ -1,0 +1,29 @@
+{
+  "name": "snabbtech-assesment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node script",
+    "dev": "nodemon script"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abiek12/BackendAPI-Assessment-.git"
+  },
+  "author": "Abhishek pp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abiek12/BackendAPI-Assessment-/issues"
+  },
+  "homepage": "https://github.com/abiek12/BackendAPI-Assessment-#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.4"
+  }
+}
