@@ -14,7 +14,7 @@ router.post("/forgot-password", async (req, res) => {
     //getting all data from the user
     const { email } = req.body;
     if (!email) {
-      res.status(400).json({ message: "Enter your!" });
+      res.status(400).json({ message: "Enter your mail id!" });
     } else {
       //check whether the user registered or not
       const user = await User.findOne({ email: email });
@@ -27,12 +27,13 @@ router.post("/forgot-password", async (req, res) => {
         const token = crypto.randomBytes(20).toString("hex");
         //Save the token in your database, set expiration
         user.resetPasswordToken = token;
-        user.resetPasswordExpires = new Date.now() + 300 * 60 * 1000;
-        await user.save();
+        user.resetPasswordExpires = Date.now() + 5 * 60 * 1000;
+        const result=await user.save();
+        console.log(result);
       }
     }
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    console.log(error);
   }
 });
 
