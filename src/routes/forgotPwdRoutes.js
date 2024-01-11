@@ -28,8 +28,16 @@ router.post("/forgot-password", async (req, res) => {
         //Save the token in your database, set expiration
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 5 * 60 * 1000;
-        const result=await user.save();
-        console.log(result);
+        await user.save();
+
+        const resetUrl = `http://localhost/api/user/reset-password/${user.resetPasswordToken}`;
+        const msg = `Password reset link. Expires in: ${user.resetPasswordExpires}`;
+
+        res.json({
+          email: user.email,
+          message: msg,
+          resetLink: resetUrl,
+        });
       }
     }
   } catch (error) {
