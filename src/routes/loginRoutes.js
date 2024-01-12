@@ -39,7 +39,7 @@ router.post("/signin", async (req, res) => {
             httpOnly: true,
           };
           res.status(200).cookie("token", token, option).json({
-            message: "Login successful",
+            message: `${user.userName} Login successful`,
             token
           });
         } else {

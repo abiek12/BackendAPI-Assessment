@@ -10,7 +10,7 @@ router.get("/", auth, async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     } else {
       res.json({
-        message: "Welcome to profile",
+        message: `Welcome ${userInfo.userName}`,
         userInfo,
       });
     }

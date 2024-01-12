@@ -32,7 +32,7 @@ router.post("/signup", async (req, res) => {
           password: hashedPassword,
         });
         res.status(200).send({
-          message: "Registered Sucessfully"
+          message: `${username} Registered Sucessfully`
         });
       }
     }
