@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3000;
-const connection = require("./connection");
-const regRoutes = require("./routes/registerRoutes");
-const loginRoutes = require("./routes/loginRoutes");
-const forgotPwd = require("./routes/forgotPwdRoutes");
-const resetPwd = require("./routes/resetPwdRoutes");
-const getUserInfo = require("./routes/getUserInfo");
+const connection = require("./src/connection");
+const regRoutes = require("./src/routes/registerRoutes");
+const loginRoutes = require("./src/routes/loginRoutes");
+const forgotPwd = require("./src/routes/forgotPwdRoutes");
+const resetPwd = require("./src/routes/resetPwdRoutes");
+const getUserInfo = require("./src/routes/getUserInfo");
 
 //Connect to DB
 connection.connectToDb;
