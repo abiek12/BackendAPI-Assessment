@@ -19,7 +19,7 @@ router.post("/forgot-password", async (req, res) => {
       //check whether the user registered or not
       const user = await User.findOne({ email: email });
       if (!user) {
-        res.status(400).json({
+        res.status(404).json({
           message: "You dont have any account!, please sign up first",
         });
       } else {
@@ -33,7 +33,7 @@ router.post("/forgot-password", async (req, res) => {
         const resetUrl = `${process.env.BASE_URL}/api/user/reset-password/${user.resetPasswordToken}`;
         const msg = `Password reset link. Expires in: ${user.resetPasswordExpires}`;
 
-        res.json({
+        res.status(200).json({
           email: user.email,
           message: msg,
           resetLink: resetUrl,

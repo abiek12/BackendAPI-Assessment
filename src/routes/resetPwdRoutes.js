@@ -42,7 +42,9 @@ router.post("/reset-password/:token", async (req, res) => {
           // Save the updated user
           await user.save();
           // Respond to the user
-          res.json({ message: `Password has been reset successfully.` });
+          res
+            .status(200)
+            .json({ message: `Password has been reset successfully.` });
         }
       }
     }

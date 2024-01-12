@@ -20,7 +20,7 @@ router.post("/signin", async (req, res) => {
       //check whether the user registered or not
       const user = await User.findOne({ email: email });
       if (!user) {
-        res.status(400).json({
+        res.status(404).json({
           message: "You dont have any account!, please sign up first",
         });
       } else {
