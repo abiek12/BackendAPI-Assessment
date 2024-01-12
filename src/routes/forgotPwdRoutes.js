@@ -30,7 +30,7 @@ router.post("/forgot-password", async (req, res) => {
         user.resetPasswordExpires = Date.now() + 5 * 60 * 1000;
         await user.save();
 
-        const resetUrl = `${process.env.RESET_LINK}/${user.resetPasswordToken}`;
+        const resetUrl = `${process.env.BASE_URL}/api/user/reset-password/${user.resetPasswordToken}`;
         const msg = `Password reset link. Expires in: ${user.resetPasswordExpires}`;
 
         res.json({
