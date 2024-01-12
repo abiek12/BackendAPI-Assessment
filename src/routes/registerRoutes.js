@@ -30,8 +30,10 @@ router.post("/signup", async (req, res) => {
           email: email,
           password: hashedPassword,
         });
-        res.status(200).send({ user });
-        res.send("Registered Sucessfully");
+        res.status(200).send({
+          message:"Registered Sucessfully",
+          user,
+        });
       }
     }
   } catch {
