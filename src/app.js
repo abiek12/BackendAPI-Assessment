@@ -6,6 +6,7 @@ const connection = require("./connection");
 const regRoutes = require("./routes/registerRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const forgotPwd = require("./routes/forgotPwdRoutes");
+const resetPwd = require("./routes/resetPwdRoutes");
 
 //Connect to DB
 connection.connectToDb;
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use("/api/user", regRoutes);
 app.use("/api/user", loginRoutes);
 app.use("/api/user", forgotPwd);
+app.use("/api/user", resetPwd);
 
 app.listen(PORT, () => {
   console.log(`Server Running at ${PORT}`);
