@@ -13,9 +13,9 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
   try {
     //get all the data from the request body
-    let { email, password } = req.body;
+    let { username, email, password } = req.body;
     //All data should be there
-    if (!(email, password)) {
+    if (!(username && email && password)) {
       res.status(400).send("All fields are compulsory!");
     } else {
       //check if user already exist email
@@ -26,13 +26,13 @@ router.post("/signup", async (req, res) => {
         //Encrypt the password
         const hashedPassword = await bcrypt.hash(password, saltRound);
         //save the user to db
-        const user = await User.create({
+        await User.create({
+          userName: username,
           email: email,
           password: hashedPassword,
         });
         res.status(200).send({
-          message:"Registered Sucessfully",
-          user,
+          message: "Registered Sucessfully"
         });
       }
     }
