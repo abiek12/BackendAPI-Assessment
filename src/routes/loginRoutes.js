@@ -40,8 +40,7 @@ router.post("/signin", async (req, res) => {
           };
           res.status(200).cookie("token", token, option).json({
             message: "Login successful",
-            token,
-            user,
+            token
           });
         } else {
           return res
