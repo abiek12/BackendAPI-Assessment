@@ -19,26 +19,31 @@ router.post("/reset-password/:token", async (req, res) => {
     if (!(newPassword && confirmPassword)) {
       res.status(400).json({ message: "All fields are compulsory" });
     } else {
-      //Find user by token and check if token has expired
-      const user = await User.findOne({
-        resetPasswordToken: resetToken,
-        resetPasswordExpires: { $gt: Date.now() },
-      });
-      if (!user) {
-        return res
-          .status(400)
-          .json({ message: "Invalid or expired password reset link!" });
+      // Check if newPassword and confirmPassword match
+      if (newPassword !== confirmPassword) {
+        return res.status(400).json({ message: "Passwords do not match" });
       } else {
-        //Encrypt the password
-        const hashedPassword = await bcrypt.hash(confirmPassword, saltRound);
-        // Set the new password and clear reset token fields
-        user.password = hashedPassword;
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpires = undefined;
-        // Save the updated user
-        await user.save();
-        // Respond to the user
-        res.json({ message: `Password has been reset successfully.` });
+        //Find user by token and check if token has expired
+        const user = await User.findOne({
+          resetPasswordToken: resetToken,
+          resetPasswordExpires: { $gt: Date.now() },
+        });
+        if (!user) {
+          return res
+            .status(400)
+            .json({ message: "Invalid or expired password reset link!" });
+        } else {
+          //Encrypt the password
+          const hashedPassword = await bcrypt.hash(confirmPassword, saltRound);
+          // Set the new password and clear reset token fields
+          user.password = hashedPassword;
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+          // Save the updated user
+          await user.save();
+          // Respond to the user
+          res.json({ message: `Password has been reset successfully.` });
+        }
       }
     }
   } catch (error) {
